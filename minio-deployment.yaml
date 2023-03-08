@@ -1,10 +1,16 @@
-# Deploys a new Namespace for the MinIO Pod
+---
 apiVersion: v1
-kind: Namespace
+kind: PersistentVolumeClaim
 metadata:
-  name: ai-demo # Change this value if you want a different namespace name
-  labels:
-    name: minio-dev # Change this value to match metadata.name
+  name: minio
+  namespace: ai-demo
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Gi
+  storageClassName: cinder-default
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -23,8 +29,9 @@ spec:
     spec:
       volumes:
         - name: data
-          emptyDir:
-            sizeLimit: 500Mi
+          persistentVolumeClaim:
+            claimName: minio
+            readOnly: false
       containers:
         - name: minio
           image: quay.io/minio/minio:latest
@@ -59,7 +66,6 @@ spec:
             limits:
               memory: "1500Mi"
               cpu: "1500m"
-
           volumeMounts:
             - mountPath: /data
               name: data
@@ -72,18 +78,3 @@ spec:
   selector:
     matchLabels:
       app: minio
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: minio
-  namespace: ai-demo
-spec:
-  selector:
-    app: minio
-  ports:
-    - port: 9090
-      name: console
-    - port: 9000
-      name: s3
-  type: ClusterIP

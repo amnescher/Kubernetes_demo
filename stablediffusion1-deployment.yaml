@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: diffusion1
+  namespace: ai-demo
+  labels:
+    app: diffusion1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: diffusion1
+  template:
+    metadata:
+      name: diffusion1
+      labels:
+        app: diffusion1
+    spec:
+      containers:
+        - args:
+            - conda
+            - run
+            - --no-capture-output
+            - -n
+            - ldm
+            - python
+            - backend.py
+          env:
+            - name: MINIO_SERVER_IP
+              value: minio
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: compute,utility
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: access_key
+              value: x0cvCuebH9ww78Cm
+            - name: secret_key
+              value: utBakKBZ3k7Swjt1iTVr15ZgVcNF2WjV
+          name: diffusion1
+          image: amineschercloud/stablediffusionversion1
+          ports:
+            - containerPort: 8504
+            - containerPort: 9000
+          resources: {}
+      restartPolicy: Always  
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: stablev1-service
+  namespace: ai-demo
+spec:
+  ports:
+    - name: "8504"
+      port: 8504
+      targetPort: 8504
+    - name: "9000"
+      port: 9000
+      targetPort: 9000
+  selector:
+    app: diffusion1
+status:
+  loadBalancer: {}

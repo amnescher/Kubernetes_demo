@@ -1,0 +1,11 @@
+kubectl apply -f "filename "
+kubectl get secret 
+kubectl get all
+kubectl get pod 
+kubectl get pod  --watch
+kubectl describe pod "podname"
+kubectl get service
+kubectl describe service "servicename"
+kubectl get pod -o wide
+kubectl get all  | grep "appName"
+ kubectl logs "Name"

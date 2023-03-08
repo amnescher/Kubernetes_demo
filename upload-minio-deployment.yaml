@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upload-minio
+  namespace: ai-demo
+  labels:
+    app: upload-minio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: upload-minio
+  template:
+    metadata:
+      name: upload-minio
+      labels:
+        app: upload-minio
+    spec:
+      volumes:
+        - name:  storage-minio
+          hostPath:
+            path: /storage/
+            type: DirectoryOrCreate
+      containers:
+        - args:
+            - python
+            - build_minIO_bucket.py
+          env:
+            - name: MINIO_SERVER_IP
+              value: minio
+            - name: access_key
+              value: x0cvCuebH9ww78Cm
+            - name: secret_key
+              value: utBakKBZ3k7Swjt1iTVr15ZgVcNF2WjV
+          name: upload-minio
+          image: amineschercloud/minio-upload
+          ports:
+            - containerPort: 9000
+          resources: {}
+          volumeMounts:
+            - mountPath: "/home/storage"
+              name: storage-minio
+              
+      
