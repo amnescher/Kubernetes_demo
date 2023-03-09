@@ -38,10 +38,13 @@ spec:
               value: utBakKBZ3k7Swjt1iTVr15ZgVcNF2WjV
           name: diffusion1
           image: amineschercloud/stablediffusionversion1
+          resources:
+            limits:
+              nvidia.com/gpu: 1
           ports:
             - containerPort: 8504
             - containerPort: 9000
-          resources: {}
+          
       restartPolicy: Always  
 ---
 
