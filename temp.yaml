@@ -23,12 +23,6 @@ spec:
           env:
             - name: STABLE_V1_IP
               value: stablev1-service
-            - name: MINIO_SERVER_IP
-              value: minio
-            - name: access_key
-              value: x0cvCuebH9ww78Cm
-            - name: secret_key
-              value: utBakKBZ3k7Swjt1iTVr15ZgVcNF2WjV
           name: frontend
           image: amineschercloud/frontend
           ports:
