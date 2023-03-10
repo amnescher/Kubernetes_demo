@@ -22,9 +22,15 @@ spec:
             - HOME.py
           env:
             - name: STABLE_V1_IP
-              value: stablev1-service
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-config         # The ConfigMap this value comes from.
+                  key: STABLE_V1_IP
             - name: MINIO_SERVER_IP
-              value: minio
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-config         # The ConfigMap this value comes from.
+                  key: MINIO_SERVER_IP
             - name: access_key
               valueFrom:
                 secretKeyRef:

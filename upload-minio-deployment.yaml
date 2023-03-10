@@ -29,9 +29,15 @@ spec:
             - name: MINIO_SERVER_IP
               value: minio
             - name: access_key
-              value: x0cvCuebH9ww78Cm
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_ACCESS_KEY
             - name: secret_key
-              value: utBakKBZ3k7Swjt1iTVr15ZgVcNF2WjV
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_SECRET_KEY
           name: upload-minio
           image: amineschercloud/minio-upload
           ports:
