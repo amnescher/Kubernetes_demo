@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: diffusion2
+  namespace: ai-demo
+  labels:
+    app: diffusion2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: diffusion2
+  template:
+    metadata:
+      name: diffusion2
+      labels:
+        app: diffusion2
+    spec:
+      containers:
+        - args:
+            - conda
+            - run
+            - --no-capture-output
+            - -n
+            - myenv
+            - python
+            - backend.py
+          env:
+            - name: MINIO_SERVER_IP
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-config         # The ConfigMap this value comes from.
+                  key: MINIO_SERVER_IP
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: compute,utility
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: access_key
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_ACCESS_KEY
+            - name: secret_key
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_SECRET_KEY
+          name: diffusion2
+          image: amineschercloud/stablediffusion2
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+          ports:
+            - containerPort: 8505
+            - containerPort: 9000
+          
+      restartPolicy: Always  
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: stablev2-service
+  namespace: ai-demo
+spec:
+  ports:
+    - name: "8504"
+      port: 8505
+      targetPort: 8505
+    - name: "9000"
+      port: 9000
+      targetPort: 9000
+  selector:
+    app: diffusion2
+status:
+  loadBalancer: {}
