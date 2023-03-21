@@ -22,7 +22,7 @@ spec:
             - run
             - --no-capture-output
             - -n
-            - myenv
+            - ldm
             - python
             - backend.py
           env:
