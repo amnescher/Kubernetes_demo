@@ -17,6 +17,8 @@ jobs:
       uses: actions/checkout@v2
     - name: List directory contents
       run: ls -R
+    - name: path name
+      run: pwd
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
