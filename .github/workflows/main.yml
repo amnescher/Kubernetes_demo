@@ -21,7 +21,7 @@ jobs:
       with:
         context: .
         file: ./stablediffusion2/Dockerfile
-        push: true
+        push: false
         tags: amineschercloud/stablediffusion2:latest
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
