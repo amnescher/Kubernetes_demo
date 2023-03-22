@@ -47,6 +47,7 @@ spec:
                   key: MINIO_SECRET_KEY
           name: diffusion2
           image: amineschercloud/stablediffusion2
+          imagePullPolicy: Never
           resources:
             limits:
               nvidia.com/gpu: 1
