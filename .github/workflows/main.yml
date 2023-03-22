@@ -26,6 +26,7 @@ jobs:
         file: ./stablediffusion2/Dockerfile
         push: false
         tags: amineschercloud/stablediffusion2:latest
+        working-directory: ./stablediffusion2
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
