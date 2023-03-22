@@ -15,19 +15,13 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: List directory contents
-      run: ls -R
-      working-directory: ./stablediffusion2
-    - name: path name
-      run: pwd
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
-        context: .
-        file: ./stablediffusion2/Dockerfile
+        context: ./stablediffusion2    
         push: false
         tags: amineschercloud/stablediffusion2:latest
-        working-directory: ./stablediffusion2
+
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
