@@ -13,5 +13,3 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 WORKDIR /home
 ADD .  .
 ENV PATH=$home/bin:$PATH
-RUN conda env update --file environment.yaml --prune && \
-    conda clean --all --force-pkgs-dirs
