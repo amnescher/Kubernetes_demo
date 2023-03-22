@@ -19,8 +19,10 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./stablediffusion2    
-        push: false
-        tags: amineschercloud/stablediffusion2:latest
+        push: true
+        tags: |
+          amineschercloud/stablediffusion2:latest
+          amineschercloud/stablediffusion2:${{ github.sha }}
 
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
