@@ -1,14 +1,11 @@
 name: Build and Push Docker Image
-
 on:
   push:
     branches:
       - main
-
 env:
   DOCKER_USERNAME: amineschercloud
   DOCKER_PASSWORD: 1497@Sina
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -21,8 +18,7 @@ jobs:
         context: ./stablediffusion2    
         push: true
         tags: |
-          amineschercloud/stablediffusion2:latest
-          amineschercloud/stablediffusion2:${{ github.sha }}
+          amineschercloud/stablediffusion2
 
       env:
         DOCKER_USERNAME: amineschercloud
