@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+  DOCKER_USERNAME: amineschercloud
+  DOCKER_PASSWORD: 1497@Sina
 
 jobs:
   build-and-push:
@@ -25,5 +25,5 @@ jobs:
           amineschercloud/stablediffusion2:${{ github.sha }}
 
       env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: amineschercloud
+        DOCKER_PASSWORD: 1497@Sina
