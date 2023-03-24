@@ -25,17 +25,17 @@ jobs:
         with:
           context: ./stablediffusion2
           push: true
-          tags: ghcr.io/${{ github.actor }}/${{ env.IMAGE_NAME_DIFFV2}}:${{ github.sha }}
+          tags: ghcr.io/${{ github.actor }}/stablediffusion2:${{ github.sha }}
 
       - name: Build and push Docker image for Stable Diffusion V1 
         uses: docker/build-push-action@v2
         with:
           context: ./stablediffusion1
           push: true
-          tags: ghcr.io/${{ github.actor }}/${{ env.IMAGE_NAME_DIFFV1}}:${{ github.sha }}
+          tags: ghcr.io/${{ github.actor }}/stablediffusion1:${{ github.sha }}
       - name: Build and push Docker image for frontend
         uses: docker/build-push-action@v2
         with:
           context: ./frontend
           push: true
-          tags: ghcr.io/${{ github.actor }}/${{ env.FRONTEND }}:${{ github.sha }}
+          tags: ghcr.io/${{ github.actor }}/frontend:${{ github.sha }}
