@@ -25,4 +25,4 @@ jobs:
         with:
           context: ./stablediffusion2
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/stablediffusion2:${{ github.sha }}
+          tags: ghcr.io/${{ github.actor }}/stablediffusion2:${{ github.sha }}
