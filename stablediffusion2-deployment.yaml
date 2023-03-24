@@ -46,7 +46,9 @@ spec:
                   name: minio-secret
                   key: MINIO_SECRET_KEY
           name: diffusion2
-          image: amineschercloud/stablediffusion2
+          image: ghcr.io/amnescher/stablediffusion2
+          imagePullSecrets:
+          
           imagePullPolicy: Never
           resources:
             limits:

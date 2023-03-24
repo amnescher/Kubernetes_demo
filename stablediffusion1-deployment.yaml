@@ -46,7 +46,7 @@ spec:
                   name: minio-secret
                   key: MINIO_SECRET_KEY
           name: diffusion1
-          image: amineschercloud/stablediffusionversion1
+          image: ghcr.io/amnescher/stablediffusion1
           resources:
             limits:
               nvidia.com/gpu: 1
