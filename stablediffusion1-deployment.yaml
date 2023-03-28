@@ -16,6 +16,8 @@ spec:
       labels:
         app: diffusion1
     spec:
+      imagePullSecrets:
+            - name: ghcr-secret
       containers:
         - args:
             - conda
@@ -46,7 +48,7 @@ spec:
                   name: minio-secret
                   key: MINIO_SECRET_KEY
           name: diffusion1
-          image: ghcr.io/amnescher/stablediffusion1
+          image: ghcr.io/amnescher/stablediffusion1:latest
           resources:
             limits:
               nvidia.com/gpu: 1

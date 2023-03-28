@@ -16,6 +16,8 @@ spec:
       labels:
         app: diffusion2
     spec:
+      imagePullSecrets:
+            - name: ghcr-secret
       containers:
         - args:
             - conda
@@ -46,8 +48,7 @@ spec:
                   name: minio-secret
                   key: MINIO_SECRET_KEY
           name: diffusion2
-          image: ghcr.io/amnescher/stablediffusion2
-          imagePullSecrets:
+          image: ghcr.io/amnescher/stablediffusion2::latest
           
           imagePullPolicy: Never
           resources:
