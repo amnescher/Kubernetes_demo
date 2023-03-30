@@ -27,12 +27,12 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.actor }}/stablediffusion2:latest
 
-      # - name: Build and push Docker image for Stable Diffusion V1 
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: ./stablediffusion1
-      #     push: true
-      #     tags: ghcr.io/${{ github.actor }}/stablediffusion1:latest
+      - name: Build and push Docker image for Stable Diffusion V1 
+        uses: docker/build-push-action@v2
+        with:
+          context: ./stablediffusion1
+          push: true
+          tags: ghcr.io/${{ github.actor }}/stablediffusion1:latest
       # - name: Build and push Docker image for Donut model
       #   uses: docker/build-push-action@v2
       #   with:

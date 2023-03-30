@@ -31,5 +31,6 @@ dependencies:
     - config
     - python-dotenv
     - minio
+    - python-multipart
     - xformers
     - -e .
