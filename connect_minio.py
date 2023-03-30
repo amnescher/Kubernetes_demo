@@ -33,7 +33,7 @@ def upload_to_minIO(ip_address, port, access_key, secret_key, bucketname, data_p
             filepath = os.path.join(root, file)
             # Upload the file to the bucket with the same structure as the original folder
             client.fput_object(bucketname, os.path.join(bucketname, os.path.relpath(filepath, data_path)), filepath)
-    print("Data Uploaded")
+    print("Data Successfully Uploaded")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
