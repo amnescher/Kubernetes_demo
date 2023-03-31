@@ -3,6 +3,29 @@ from minio import Minio
 from minio.error import S3Error
 import os
 
+from minio import Minio
+from minio.error import S3Error
+
+def list_objects_in_bucket(bucket_name, minio_client):
+    """
+    List all objects in the specified Minio bucket.
+
+    Args:
+    - bucket_name (str): The name of the Minio bucket to list the objects from.
+    - minio_client (Minio): An authenticated Minio client instance.
+
+    Returns:
+    - List of object names (str) in the specified bucket.
+    """
+    try:
+        objects = minio_client.list_objects(bucket_name, recursive=True)
+        object_names = [obj.object_name for obj in objects]
+        return object_names
+    except S3Error as e:
+        print(f"Error occurred while listing objects in bucket {bucket_name}: {e}")
+
+
+
 def upload_to_minIO(ip_address, port, access_key, secret_key, bucketname, data_path):
     '''
     This takes in the following arguments:
@@ -33,7 +56,13 @@ def upload_to_minIO(ip_address, port, access_key, secret_key, bucketname, data_p
             filepath = os.path.join(root, file)
             # Upload the file to the bucket with the same structure as the original folder
             client.fput_object(bucketname, os.path.join(bucketname, os.path.relpath(filepath, data_path)), filepath)
-    print("Data Successfully Uploaded")
+            
+    print("Data Successfully Uploaded!")
+    print(f"objects in {bucketname} are as follows.")
+    minio_objects = list_objects_in_bucket(bucketname,client)
+    for obj in minio_objects:
+        print(obj)
+    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

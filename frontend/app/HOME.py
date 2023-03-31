@@ -19,9 +19,9 @@ port_config = os.getenv("DB_IP")
 
 # Load background images
 #add_bg_from_local("storage/frontend/logo.jpeg")
-image_id = Image.open("images/id.png")
-image_stablediff = Image.open("images/butterfly.jpeg")
-image_faceResto = Image.open("images/faceresto.jpeg")
+image_id = Image.open("app/images/id.png")
+image_stablediff = Image.open("app/images/butterfly.jpeg")
+image_faceResto = Image.open("app/images/faceresto.jpeg")
 
 # Page title
 st.write("# ESCERCLOUD AI Computer Vision Services - Demo! 👋")

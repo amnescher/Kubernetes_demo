@@ -39,9 +39,9 @@ jobs:
       #     context: ./donut
       #     push: true
       #     tags: ghcr.io/${{ github.actor }}/donut:latest
-      # - name: Build and push Docker image for frontend
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: ./frontend
-      #     push: true
-      #     tags: ghcr.io/${{ github.actor }}/frontend:latest
+      - name: Build and push Docker image for frontend
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend
+          push: true
+          tags: ghcr.io/${{ github.actor }}/frontend:latest
