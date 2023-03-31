@@ -72,7 +72,7 @@ Deploy the Stable diffusion 2 pod and service:
 ```
 kubectl apply -f stablediffusion2-deployment.yaml
 ```
-## Deploy the front end service 
+## Deploy the frontend service 
 Deploy the Stable diffusion 1 pod and loadbalencer:
 ```
 kubectl apply -f frontend-deployment.yaml 
