@@ -50,12 +50,16 @@ def upload_to_minIO(ip_address, port, access_key, secret_key, bucketname, data_p
     found = client.bucket_exists(bucketname)
     if not found:
         client.make_bucket(bucketname)
+        print(f"Bucket {bucketname} was made")
     # Recursively iterate through the folder and upload each file to Minio bucket
+    count = 0
     for root, dirs, files in os.walk(data_path):
         for file in files:
             filepath = os.path.join(root, file)
             # Upload the file to the bucket with the same structure as the original folder
             client.fput_object(bucketname, os.path.join(bucketname, os.path.relpath(filepath, data_path)), filepath)
+            print(f"file uploaded {count}")
+            count+=1
             
     print("Data Successfully Uploaded!")
     print(f"objects in {bucketname} are as follows.")
