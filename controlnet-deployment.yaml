@@ -24,7 +24,7 @@ spec:
             - run
             - --no-capture-output
             - -n
-            - ldm
+            - control
             - python
             - backend.py
           env:
