@@ -15,5 +15,6 @@ COPY environment.yaml .
 ENV PATH=$home/bin:$PATH
 RUN conda env update --file environment.yaml --prune && \
     conda clean --all --force-pkgs-dirs
+
     
 ADD .  .
