@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controlnet
+  namespace: ai-demo
+  labels:
+    app: controlnet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: controlnet
+  template:
+    metadata:
+      name: controlnet
+      labels:
+        app: controlnet
+    spec:
+      imagePullSecrets:
+            - name: ghcr-secret
+      containers:
+        - args:
+            - conda
+            - run
+            - --no-capture-output
+            - -n
+            - ldm
+            - python
+            - backend.py
+          env:
+            - name: MINIO_SERVER_IP
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-config         # The ConfigMap this value comes from.
+                  key: MINIO_SERVER_IP
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: compute,utility
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: access_key
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_ACCESS_KEY
+            - name: secret_key
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_SECRET_KEY
+          name: controlnet
+          image: ghcr.io/amnescher/controlnet:latest
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+          ports:
+            - containerPort: 8507
+            - containerPort: 9000
+          
+      restartPolicy: Always  
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: controlnet-service
+  namespace: ai-demo
+spec:
+  ports:
+    - name: "8507"
+      port: 8507
+      targetPort: 8507
+    - name: "9000"
+      port: 9000
+      targetPort: 9000
+  selector:
+    app: controlnet
+status:
+  loadBalancer: {}
