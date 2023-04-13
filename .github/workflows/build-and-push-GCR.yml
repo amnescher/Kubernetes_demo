@@ -46,9 +46,9 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.actor }}/frontend:latest
 
-      # - name: Build and push Docker image for frontend
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: ./ControlNet
-      #     push: true
-      #     tags: ghcr.io/${{ github.actor }}/controlnet:latest
+      - name: Build and push Docker image for frontend
+        uses: docker/build-push-action@v2
+        with:
+          context: ./ControlNet
+          push: true
+          tags: ghcr.io/${{ github.actor }}/controlnet:latest

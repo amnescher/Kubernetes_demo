@@ -33,6 +33,11 @@ spec:
                 configMapKeyRef:
                   name: demo-config         # The ConfigMap this value comes from.
                   key: STABLE_V2_IP
+            - name: ControlNet_IP
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-config         # The ConfigMap this value comes from.
+                  key: ControlNet_IP
             - name: MINIO_SERVER_IP
               valueFrom:
                 configMapKeyRef:
